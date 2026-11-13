@@ -1,0 +1,1898 @@
+{
+  "$defs": {
+    "ArtDirection": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "maxLength": 100,
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "rationale": {
+          "maxLength": 2000,
+          "minLength": 1,
+          "title": "Rationale",
+          "type": "string"
+        },
+        "palette": {
+          "items": {
+            "pattern": "^#[0-9a-fA-F]{6}$",
+            "type": "string"
+          },
+          "maxItems": 8,
+          "minItems": 2,
+          "title": "Palette",
+          "type": "array"
+        },
+        "materials": {
+          "title": "Materials",
+          "type": "string"
+        },
+        "lighting": {
+          "title": "Lighting",
+          "type": "string"
+        },
+        "photography": {
+          "title": "Photography",
+          "type": "string"
+        },
+        "typography": {
+          "title": "Typography",
+          "type": "string"
+        },
+        "motifs": {
+          "title": "Motifs",
+          "type": "string"
+        },
+        "rhythm": {
+          "title": "Rhythm",
+          "type": "string"
+        },
+        "avoid": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Avoid",
+          "type": "array"
+        }
+      },
+      "required": [
+        "name",
+        "rationale",
+        "palette",
+        "materials",
+        "lighting",
+        "photography",
+        "typography",
+        "motifs",
+        "rhythm",
+        "avoid"
+      ],
+      "title": "ArtDirection",
+      "type": "object"
+    },
+    "ArtEdit": {
+      "additionalProperties": false,
+      "properties": {
+        "version": {
+          "title": "Version",
+          "type": "integer"
+        },
+        "art_direction": {
+          "$ref": "#/$defs/ArtDirection"
+        },
+        "invalidate_images": {
+          "default": true,
+          "title": "Invalidate Images",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "version",
+        "art_direction",
+        "invalidate_images"
+      ],
+      "title": "ArtEdit",
+      "type": "object"
+    },
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^[a-zA-Z0-9_-]{1,80}$",
+          "title": "Id",
+          "type": "string"
+        },
+        "name": {
+          "maxLength": 180,
+          "title": "Name",
+          "type": "string"
+        },
+        "role": {
+          "enum": [
+            "product",
+            "person",
+            "manual",
+            "reference"
+          ],
+          "title": "Role",
+          "type": "string"
+        },
+        "file": {
+          "pattern": "^[a-zA-Z0-9_-][a-zA-Z0-9_.-]{0,150}$",
+          "title": "File",
+          "type": "string"
+        },
+        "preview": {
+          "anyOf": [
+            {
+              "pattern": "^[a-zA-Z0-9_-][a-zA-Z0-9_.-]{0,150}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Preview"
+        },
+        "mime": {
+          "title": "Mime",
+          "type": "string"
+        },
+        "width": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Width"
+        },
+        "height": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Height"
+        },
+        "sha256": {
+          "title": "Sha256",
+          "type": "string"
+        },
+        "page_count": {
+          "default": 0,
+          "title": "Page Count",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "role",
+        "file",
+        "preview",
+        "mime",
+        "width",
+        "height",
+        "sha256",
+        "page_count"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "CreateProject": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "maxLength": 100,
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "target_model": {
+          "default": "",
+          "maxLength": 100,
+          "title": "Target Model",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "target_model"
+      ],
+      "title": "CreateProject",
+      "type": "object"
+    },
+    "DeploymentRequest": {
+      "additionalProperties": false,
+      "properties": {
+        "subscription": {
+          "title": "Subscription",
+          "type": "string"
+        },
+        "resource_group": {
+          "title": "Resource Group",
+          "type": "string"
+        },
+        "resource": {
+          "title": "Resource",
+          "type": "string"
+        },
+        "model": {
+          "enum": [
+            "gpt-image-2.5-sunburst",
+            "gpt-image-2.5-flare"
+          ],
+          "title": "Model",
+          "type": "string"
+        },
+        "version": {
+          "title": "Version",
+          "type": "string"
+        },
+        "deployment": {
+          "pattern": "^[a-zA-Z0-9_-]{1,80}$",
+          "title": "Deployment",
+          "type": "string"
+        },
+        "sku": {
+          "title": "Sku",
+          "type": "string"
+        },
+        "capacity": {
+          "maximum": 100,
+          "minimum": 1,
+          "title": "Capacity",
+          "type": "integer"
+        },
+        "confirmed": {
+          "const": true,
+          "title": "Confirmed",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "subscription",
+        "resource_group",
+        "resource",
+        "model",
+        "version",
+        "deployment",
+        "sku",
+        "capacity",
+        "confirmed"
+      ],
+      "title": "DeploymentRequest",
+      "type": "object"
+    },
+    "ExportRequest": {
+      "additionalProperties": false,
+      "properties": {
+        "mode": {
+          "default": "draft",
+          "enum": [
+            "draft",
+            "publish"
+          ],
+          "title": "Mode",
+          "type": "string"
+        },
+        "format": {
+          "default": "png",
+          "enum": [
+            "png",
+            "jpeg"
+          ],
+          "title": "Format",
+          "type": "string"
+        },
+        "slice_height": {
+          "anyOf": [
+            {
+              "maximum": 10000,
+              "minimum": 500,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Slice Height"
+        }
+      },
+      "required": [
+        "mode",
+        "format",
+        "slice_height"
+      ],
+      "title": "ExportRequest",
+      "type": "object"
+    },
+    "Fact": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^[a-zA-Z0-9_-]{1,80}$",
+          "title": "Id",
+          "type": "string"
+        },
+        "label": {
+          "maxLength": 100,
+          "minLength": 1,
+          "title": "Label",
+          "type": "string"
+        },
+        "value": {
+          "maxLength": 500,
+          "minLength": 1,
+          "title": "Value",
+          "type": "string"
+        },
+        "model": {
+          "default": "",
+          "title": "Model",
+          "type": "string"
+        },
+        "source_id": {
+          "anyOf": [
+            {
+              "pattern": "^[a-zA-Z0-9_-]{1,80}$",
+              "type": "string"
+            },
+            {
+              "const": "",
+              "type": "string"
+            }
+          ],
+          "default": "",
+          "title": "Source Id"
+        },
+        "quote": {
+          "default": "",
+          "maxLength": 2000,
+          "title": "Quote",
+          "type": "string"
+        },
+        "is_claim": {
+          "title": "Is Claim",
+          "type": "boolean"
+        },
+        "condition": {
+          "default": "",
+          "maxLength": 2000,
+          "title": "Condition",
+          "type": "string"
+        },
+        "approved": {
+          "default": false,
+          "title": "Approved",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "id",
+        "label",
+        "value",
+        "model",
+        "source_id",
+        "quote",
+        "is_claim",
+        "condition",
+        "approved"
+      ],
+      "title": "Fact",
+      "type": "object"
+    },
+    "FoundrySettings": {
+      "additionalProperties": false,
+      "properties": {
+        "planning_endpoint": {
+          "default": "",
+          "title": "Planning Endpoint",
+          "type": "string"
+        },
+        "planning_deployment": {
+          "default": "",
+          "title": "Planning Deployment",
+          "type": "string"
+        },
+        "planning_model": {
+          "const": "gpt-6.1-sol",
+          "default": "gpt-6.1-sol",
+          "title": "Planning Model",
+          "type": "string"
+        },
+        "image_endpoint": {
+          "default": "",
+          "title": "Image Endpoint",
+          "type": "string"
+        },
+        "image_deployment": {
+          "default": "",
+          "title": "Image Deployment",
+          "type": "string"
+        },
+        "image_model": {
+          "default": "gpt-image-2.5-sunburst",
+          "enum": [
+            "gpt-image-2.5-sunburst",
+            "gpt-image-2.5-flare"
+          ],
+          "title": "Image Model",
+          "type": "string"
+        },
+        "subscription": {
+          "default": "",
+          "title": "Subscription",
+          "type": "string"
+        },
+        "tenant": {
+          "default": "",
+          "title": "Tenant",
+          "type": "string"
+        },
+        "quality": {
+          "default": "medium",
+          "enum": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "title": "Quality",
+          "type": "string"
+        },
+        "image_requests_per_minute": {
+          "default": 2,
+          "maximum": 120,
+          "minimum": 1,
+          "title": "Image Requests Per Minute",
+          "type": "integer"
+        },
+        "image_nodes": {
+          "items": {
+            "$ref": "#/$defs/ImageNode"
+          },
+          "maxItems": 4,
+          "title": "Image Nodes",
+          "type": "array"
+        }
+      },
+      "required": [
+        "planning_endpoint",
+        "planning_deployment",
+        "planning_model",
+        "image_endpoint",
+        "image_deployment",
+        "image_model",
+        "subscription",
+        "tenant",
+        "quality",
+        "image_requests_per_minute",
+        "image_nodes"
+      ],
+      "title": "FoundrySettings",
+      "type": "object"
+    },
+    "GenerationRequest": {
+      "additionalProperties": false,
+      "properties": {
+        "screen_ids": {
+          "items": {
+            "pattern": "^[a-zA-Z0-9_-]{1,80}$",
+            "type": "string"
+          },
+          "maxItems": 16,
+          "minItems": 1,
+          "title": "Screen Ids",
+          "type": "array"
+        },
+        "route": {
+          "anyOf": [
+            {
+              "const": "B",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Route"
+        }
+      },
+      "required": [
+        "screen_ids",
+        "route"
+      ],
+      "title": "GenerationRequest",
+      "type": "object"
+    },
+    "ImageNode": {
+      "additionalProperties": false,
+      "properties": {
+        "endpoint": {
+          "title": "Endpoint",
+          "type": "string"
+        },
+        "deployment": {
+          "title": "Deployment",
+          "type": "string"
+        },
+        "subscription": {
+          "default": "",
+          "title": "Subscription",
+          "type": "string"
+        },
+        "requests_per_minute": {
+          "default": 2,
+          "maximum": 120,
+          "minimum": 1,
+          "title": "Requests Per Minute",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "endpoint",
+        "deployment",
+        "subscription",
+        "requests_per_minute"
+      ],
+      "title": "ImageNode",
+      "type": "object"
+    },
+    "Job": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^[a-zA-Z0-9_-]{1,80}$",
+          "title": "Id",
+          "type": "string"
+        },
+        "project_id": {
+          "pattern": "^[a-zA-Z0-9_-]{1,80}$",
+          "title": "Project Id",
+          "type": "string"
+        },
+        "kind": {
+          "title": "Kind",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "queued",
+            "running",
+            "succeeded",
+            "failed"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "progress": {
+          "default": 0,
+          "title": "Progress",
+          "type": "integer"
+        },
+        "message": {
+          "default": "",
+          "title": "Message",
+          "type": "string"
+        },
+        "error": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Error"
+        },
+        "result": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Result"
+        },
+        "created_at": {
+          "title": "Created At",
+          "type": "string"
+        },
+        "updated_at": {
+          "title": "Updated At",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "project_id",
+        "kind",
+        "status",
+        "progress",
+        "message",
+        "error",
+        "result",
+        "created_at",
+        "updated_at"
+      ],
+      "title": "Job",
+      "type": "object"
+    },
+    "Layer": {
+      "additionalProperties": false,
+      "properties": {
+        "x": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "X",
+          "type": "number"
+        },
+        "y": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Y",
+          "type": "number"
+        },
+        "width": {
+          "exclusiveMinimum": 0,
+          "maximum": 1,
+          "title": "Width",
+          "type": "number"
+        },
+        "height": {
+          "exclusiveMinimum": 0,
+          "maximum": 1,
+          "title": "Height",
+          "type": "number"
+        },
+        "id": {
+          "pattern": "^[a-zA-Z0-9_-]{1,80}$",
+          "title": "Id",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "text",
+            "rect",
+            "line"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "content": {
+          "default": "",
+          "maxLength": 2000,
+          "title": "Content",
+          "type": "string"
+        },
+        "color": {
+          "pattern": "^#[0-9a-fA-F]{6}$",
+          "title": "Color",
+          "type": "string"
+        },
+        "font": {
+          "default": "PingFang SC",
+          "enum": [
+            "PingFang SC",
+            "Songti SC",
+            "Heiti SC"
+          ],
+          "title": "Font",
+          "type": "string"
+        },
+        "font_size": {
+          "default": 32,
+          "maximum": 180,
+          "minimum": 12,
+          "title": "Font Size",
+          "type": "integer"
+        },
+        "weight": {
+          "default": 400,
+          "enum": [
+            300,
+            400,
+            500,
+            600,
+            700,
+            800
+          ],
+          "title": "Weight",
+          "type": "integer"
+        },
+        "line_height": {
+          "default": 1.35,
+          "maximum": 2,
+          "minimum": 1,
+          "title": "Line Height",
+          "type": "number"
+        },
+        "align": {
+          "default": "left",
+          "enum": [
+            "left",
+            "center",
+            "right"
+          ],
+          "title": "Align",
+          "type": "string"
+        },
+        "opacity": {
+          "default": 1,
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Opacity",
+          "type": "number"
+        },
+        "radius": {
+          "default": 0,
+          "maximum": 200,
+          "minimum": 0,
+          "title": "Radius",
+          "type": "integer"
+        },
+        "gradient_end": {
+          "anyOf": [
+            {
+              "pattern": "^#[0-9a-fA-F]{6}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Gradient End"
+        },
+        "gradient_angle": {
+          "default": 180,
+          "maximum": 360,
+          "minimum": 0,
+          "title": "Gradient Angle",
+          "type": "integer"
+        },
+        "fact_ids": {
+          "items": {
+            "pattern": "^[a-zA-Z0-9_-]{1,80}$",
+            "type": "string"
+          },
+          "title": "Fact Ids",
+          "type": "array"
+        },
+        "runs": {
+          "items": {
+            "$ref": "#/$defs/TextRun"
+          },
+          "title": "Runs",
+          "type": "array"
+        }
+      },
+      "required": [
+        "x",
+        "y",
+        "width",
+        "height",
+        "id",
+        "kind",
+        "content",
+        "color",
+        "font",
+        "font_size",
+        "weight",
+        "line_height",
+        "align",
+        "opacity",
+        "radius",
+        "gradient_end",
+        "gradient_angle",
+        "fact_ids",
+        "runs"
+      ],
+      "title": "Layer",
+      "type": "object"
+    },
+    "ModelCall": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^[a-zA-Z0-9_-]{1,80}$",
+          "title": "Id",
+          "type": "string"
+        },
+        "project_id": {
+          "pattern": "^[a-zA-Z0-9_-]{1,80}$",
+          "title": "Project Id",
+          "type": "string"
+        },
+        "screen_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Screen Id"
+        },
+        "purpose": {
+          "title": "Purpose",
+          "type": "string"
+        },
+        "model": {
+          "title": "Model",
+          "type": "string"
+        },
+        "deployment": {
+          "title": "Deployment",
+          "type": "string"
+        },
+        "endpoint": {
+          "title": "Endpoint",
+          "type": "string"
+        },
+        "prompt": {
+          "maxLength": 2032000,
+          "title": "Prompt",
+          "type": "string"
+        },
+        "request": {
+          "additionalProperties": true,
+          "title": "Request",
+          "type": "object"
+        },
+        "usage": {
+          "additionalProperties": true,
+          "title": "Usage",
+          "type": "object"
+        },
+        "status": {
+          "enum": [
+            "running",
+            "succeeded",
+            "failed"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "error": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Error"
+        },
+        "created_at": {
+          "title": "Created At",
+          "type": "string"
+        },
+        "completed_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Completed At"
+        },
+        "response": {
+          "additionalProperties": true,
+          "title": "Response",
+          "type": "object"
+        }
+      },
+      "required": [
+        "id",
+        "project_id",
+        "screen_id",
+        "purpose",
+        "model",
+        "deployment",
+        "endpoint",
+        "prompt",
+        "request",
+        "usage",
+        "status",
+        "error",
+        "created_at",
+        "completed_at",
+        "response"
+      ],
+      "title": "ModelCall",
+      "type": "object"
+    },
+    "Project": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^[a-zA-Z0-9_-]{1,80}$",
+          "title": "Id",
+          "type": "string"
+        },
+        "name": {
+          "maxLength": 100,
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "target_model": {
+          "default": "",
+          "maxLength": 100,
+          "title": "Target Model",
+          "type": "string"
+        },
+        "locale": {
+          "const": "zh-CN",
+          "default": "zh-CN",
+          "title": "Locale",
+          "type": "string"
+        },
+        "version": {
+          "default": 1,
+          "title": "Version",
+          "type": "integer"
+        },
+        "width": {
+          "default": 1200,
+          "maximum": 1600,
+          "minimum": 640,
+          "title": "Width",
+          "type": "integer"
+        },
+        "created_at": {
+          "title": "Created At",
+          "type": "string"
+        },
+        "updated_at": {
+          "title": "Updated At",
+          "type": "string"
+        },
+        "assets": {
+          "items": {
+            "$ref": "#/$defs/Asset"
+          },
+          "maxItems": 12,
+          "title": "Assets",
+          "type": "array"
+        },
+        "pages": {
+          "items": {
+            "$ref": "#/$defs/SourcePage"
+          },
+          "maxItems": 288,
+          "title": "Pages",
+          "type": "array"
+        },
+        "facts": {
+          "items": {
+            "$ref": "#/$defs/Fact"
+          },
+          "maxItems": 60,
+          "title": "Facts",
+          "type": "array"
+        },
+        "facts_confirmed": {
+          "default": false,
+          "title": "Facts Confirmed",
+          "type": "boolean"
+        },
+        "extraction_warnings": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Extraction Warnings",
+          "type": "array"
+        },
+        "art_direction": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ArtDirection"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "art_version": {
+          "default": 0,
+          "title": "Art Version",
+          "type": "integer"
+        },
+        "direction_confirmed": {
+          "default": false,
+          "title": "Direction Confirmed",
+          "type": "boolean"
+        },
+        "screens": {
+          "items": {
+            "$ref": "#/$defs/Screen"
+          },
+          "maxItems": 16,
+          "title": "Screens",
+          "type": "array"
+        },
+        "prompt_overrides": {
+          "additionalProperties": {
+            "maxLength": 32000,
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Prompt Overrides",
+          "type": "object"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "target_model",
+        "locale",
+        "version",
+        "width",
+        "created_at",
+        "updated_at",
+        "assets",
+        "pages",
+        "facts",
+        "facts_confirmed",
+        "extraction_warnings",
+        "art_direction",
+        "art_version",
+        "direction_confirmed",
+        "screens",
+        "prompt_overrides"
+      ],
+      "title": "Project",
+      "type": "object"
+    },
+    "ProjectSummary": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^[a-zA-Z0-9_-]{1,80}$",
+          "title": "Id",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "version": {
+          "title": "Version",
+          "type": "integer"
+        },
+        "updated_at": {
+          "title": "Updated At",
+          "type": "string"
+        },
+        "screen_count": {
+          "title": "Screen Count",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "version",
+        "updated_at",
+        "screen_count"
+      ],
+      "title": "ProjectSummary",
+      "type": "object"
+    },
+    "PromptCatalog": {
+      "additionalProperties": false,
+      "properties": {
+        "project_id": {
+          "pattern": "^[a-zA-Z0-9_-]{1,80}$",
+          "title": "Project Id",
+          "type": "string"
+        },
+        "version": {
+          "title": "Version",
+          "type": "integer"
+        },
+        "entries": {
+          "items": {
+            "$ref": "#/$defs/PromptPreview"
+          },
+          "title": "Entries",
+          "type": "array"
+        }
+      },
+      "required": [
+        "project_id",
+        "version",
+        "entries"
+      ],
+      "title": "PromptCatalog",
+      "type": "object"
+    },
+    "PromptEdit": {
+      "additionalProperties": false,
+      "properties": {
+        "version": {
+          "title": "Version",
+          "type": "integer"
+        },
+        "step": {
+          "enum": [
+            "scanned_page_ocr",
+            "extract_facts",
+            "design_plan",
+            "concept",
+            "extract_layout",
+            "B_regenerate",
+            "fit_layout_B",
+            "revise_screen_prompts"
+          ],
+          "title": "Step",
+          "type": "string"
+        },
+        "screen_id": {
+          "anyOf": [
+            {
+              "pattern": "^[a-zA-Z0-9_-]{1,80}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Screen Id"
+        },
+        "instructions": {
+          "anyOf": [
+            {
+              "maxLength": 32000,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Instructions"
+        }
+      },
+      "required": [
+        "version",
+        "step",
+        "screen_id",
+        "instructions"
+      ],
+      "title": "PromptEdit",
+      "type": "object"
+    },
+    "PromptPreview": {
+      "additionalProperties": false,
+      "properties": {
+        "step": {
+          "enum": [
+            "scanned_page_ocr",
+            "extract_facts",
+            "design_plan",
+            "concept",
+            "extract_layout",
+            "B_regenerate",
+            "fit_layout_B",
+            "revise_screen_prompts"
+          ],
+          "title": "Step",
+          "type": "string"
+        },
+        "screen_id": {
+          "anyOf": [
+            {
+              "pattern": "^[a-zA-Z0-9_-]{1,80}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Screen Id"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "model": {
+          "title": "Model",
+          "type": "string"
+        },
+        "instructions": {
+          "maxLength": 32000,
+          "minLength": 1,
+          "title": "Instructions",
+          "type": "string"
+        },
+        "default_instructions": {
+          "maxLength": 32000,
+          "minLength": 1,
+          "title": "Default Instructions",
+          "type": "string"
+        },
+        "context": {
+          "maxLength": 2000000,
+          "title": "Context",
+          "type": "string"
+        },
+        "effective_prompt": {
+          "maxLength": 2032000,
+          "title": "Effective Prompt",
+          "type": "string"
+        },
+        "system_prompt": {
+          "maxLength": 100000,
+          "title": "System Prompt",
+          "type": "string"
+        },
+        "customized": {
+          "title": "Customized",
+          "type": "boolean"
+        },
+        "image_files": {
+          "items": {
+            "pattern": "^[a-zA-Z0-9_-][a-zA-Z0-9_.-]{0,150}$",
+            "type": "string"
+          },
+          "title": "Image Files",
+          "type": "array"
+        },
+        "notes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Notes",
+          "type": "array"
+        }
+      },
+      "required": [
+        "step",
+        "screen_id",
+        "title",
+        "model",
+        "instructions",
+        "default_instructions",
+        "context",
+        "effective_prompt",
+        "system_prompt",
+        "customized",
+        "image_files",
+        "notes"
+      ],
+      "title": "PromptPreview",
+      "type": "object"
+    },
+    "RouteReview": {
+      "additionalProperties": false,
+      "properties": {
+        "composition": {
+          "maximum": 5,
+          "minimum": 1,
+          "title": "Composition",
+          "type": "integer"
+        },
+        "cleanliness": {
+          "maximum": 5,
+          "minimum": 1,
+          "title": "Cleanliness",
+          "type": "integer"
+        },
+        "consistency": {
+          "maximum": 5,
+          "minimum": 1,
+          "title": "Consistency",
+          "type": "integer"
+        },
+        "typography": {
+          "maximum": 5,
+          "minimum": 1,
+          "title": "Typography",
+          "type": "integer"
+        },
+        "notes": {
+          "default": "",
+          "title": "Notes",
+          "type": "string"
+        }
+      },
+      "required": [
+        "composition",
+        "cleanliness",
+        "consistency",
+        "typography",
+        "notes"
+      ],
+      "title": "RouteReview",
+      "type": "object"
+    },
+    "Screen": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^[a-zA-Z0-9_-]{1,80}$",
+          "title": "Id",
+          "type": "string"
+        },
+        "title": {
+          "maxLength": 100,
+          "minLength": 1,
+          "title": "Title",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "hero",
+            "feature",
+            "technical",
+            "detail",
+            "parameters",
+            "lifestyle"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "height": {
+          "maximum": 3200,
+          "minimum": 480,
+          "title": "Height",
+          "type": "integer"
+        },
+        "purpose": {
+          "title": "Purpose",
+          "type": "string"
+        },
+        "composition": {
+          "title": "Composition",
+          "type": "string"
+        },
+        "background": {
+          "pattern": "^#[0-9a-fA-F]{6}$",
+          "title": "Background",
+          "type": "string"
+        },
+        "layers": {
+          "items": {
+            "$ref": "#/$defs/Layer"
+          },
+          "maxItems": 50,
+          "minItems": 1,
+          "title": "Layers",
+          "type": "array"
+        },
+        "concept_prompt": {
+          "minLength": 10,
+          "title": "Concept Prompt",
+          "type": "string"
+        },
+        "regenerate_prompt": {
+          "minLength": 10,
+          "title": "Regenerate Prompt",
+          "type": "string"
+        },
+        "concept": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Variant"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "erase_prompt": {
+          "default": "",
+          "title": "Erase Prompt",
+          "type": "string"
+        },
+        "a": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Variant"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "b": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Variant"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "mask": {
+          "anyOf": [
+            {
+              "pattern": "^[a-zA-Z0-9_-][a-zA-Z0-9_.-]{0,150}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Mask"
+        },
+        "selected_route": {
+          "anyOf": [
+            {
+              "enum": [
+                "A",
+                "B"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Selected Route"
+        },
+        "approved": {
+          "default": false,
+          "title": "Approved",
+          "type": "boolean"
+        },
+        "stale": {
+          "default": false,
+          "title": "Stale",
+          "type": "boolean"
+        },
+        "layout_from_concept": {
+          "default": false,
+          "title": "Layout From Concept",
+          "type": "boolean"
+        },
+        "reviews": {
+          "additionalProperties": {
+            "$ref": "#/$defs/RouteReview"
+          },
+          "propertyNames": {
+            "enum": [
+              "A",
+              "B"
+            ]
+          },
+          "title": "Reviews",
+          "type": "object"
+        },
+        "warnings": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Warnings",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "kind",
+        "height",
+        "purpose",
+        "composition",
+        "background",
+        "layers",
+        "concept_prompt",
+        "regenerate_prompt",
+        "concept",
+        "erase_prompt",
+        "a",
+        "b",
+        "mask",
+        "selected_route",
+        "approved",
+        "stale",
+        "layout_from_concept",
+        "reviews",
+        "warnings"
+      ],
+      "title": "Screen",
+      "type": "object"
+    },
+    "ScreenContentEdit": {
+      "additionalProperties": false,
+      "properties": {
+        "layers": {
+          "items": {
+            "$ref": "#/$defs/Layer"
+          },
+          "maxItems": 50,
+          "minItems": 1,
+          "title": "Layers",
+          "type": "array"
+        },
+        "height": {
+          "maximum": 3200,
+          "minimum": 480,
+          "title": "Height",
+          "type": "integer"
+        },
+        "selected_route": {
+          "anyOf": [
+            {
+              "const": "B",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Selected Route"
+        },
+        "approved": {
+          "title": "Approved",
+          "type": "boolean"
+        },
+        "reviews": {
+          "additionalProperties": {
+            "$ref": "#/$defs/RouteReview"
+          },
+          "propertyNames": {
+            "enum": [
+              "A",
+              "B"
+            ]
+          },
+          "title": "Reviews",
+          "type": "object"
+        }
+      },
+      "required": [
+        "layers",
+        "height",
+        "selected_route",
+        "approved",
+        "reviews"
+      ],
+      "title": "ScreenContentEdit",
+      "type": "object"
+    },
+    "ScreenEdit": {
+      "additionalProperties": false,
+      "properties": {
+        "layers": {
+          "items": {
+            "$ref": "#/$defs/Layer"
+          },
+          "maxItems": 50,
+          "minItems": 1,
+          "title": "Layers",
+          "type": "array"
+        },
+        "height": {
+          "maximum": 3200,
+          "minimum": 480,
+          "title": "Height",
+          "type": "integer"
+        },
+        "selected_route": {
+          "anyOf": [
+            {
+              "const": "B",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Selected Route"
+        },
+        "approved": {
+          "title": "Approved",
+          "type": "boolean"
+        },
+        "reviews": {
+          "additionalProperties": {
+            "$ref": "#/$defs/RouteReview"
+          },
+          "propertyNames": {
+            "enum": [
+              "A",
+              "B"
+            ]
+          },
+          "title": "Reviews",
+          "type": "object"
+        },
+        "version": {
+          "title": "Version",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "layers",
+        "height",
+        "selected_route",
+        "approved",
+        "reviews",
+        "version"
+      ],
+      "title": "ScreenEdit",
+      "type": "object"
+    },
+    "ScreensEdit": {
+      "additionalProperties": false,
+      "properties": {
+        "version": {
+          "title": "Version",
+          "type": "integer"
+        },
+        "screens": {
+          "maxProperties": 16,
+          "minProperties": 1,
+          "patternProperties": {
+            "^[a-zA-Z0-9_-]{1,80}$": {
+              "$ref": "#/$defs/ScreenContentEdit"
+            }
+          },
+          "title": "Screens",
+          "type": "object"
+        }
+      },
+      "required": [
+        "version",
+        "screens"
+      ],
+      "title": "ScreensEdit",
+      "type": "object"
+    },
+    "SourcePage": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^[a-zA-Z0-9_-]{1,80}$",
+          "title": "Id",
+          "type": "string"
+        },
+        "asset_id": {
+          "pattern": "^[a-zA-Z0-9_-]{1,80}$",
+          "title": "Asset Id",
+          "type": "string"
+        },
+        "page": {
+          "minimum": 1,
+          "title": "Page",
+          "type": "integer"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "preview": {
+          "pattern": "^[a-zA-Z0-9_-][a-zA-Z0-9_.-]{0,150}$",
+          "title": "Preview",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "asset_id",
+        "page",
+        "text",
+        "preview"
+      ],
+      "title": "SourcePage",
+      "type": "object"
+    },
+    "TargetModelEdit": {
+      "additionalProperties": false,
+      "properties": {
+        "version": {
+          "title": "Version",
+          "type": "integer"
+        },
+        "target_model": {
+          "maxLength": 100,
+          "title": "Target Model",
+          "type": "string"
+        }
+      },
+      "required": [
+        "version",
+        "target_model"
+      ],
+      "title": "TargetModelEdit",
+      "type": "object"
+    },
+    "TextRun": {
+      "additionalProperties": false,
+      "properties": {
+        "text": {
+          "maxLength": 2000,
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        },
+        "color": {
+          "pattern": "^#[0-9a-fA-F]{6}$",
+          "title": "Color",
+          "type": "string"
+        },
+        "gradient_end": {
+          "anyOf": [
+            {
+              "pattern": "^#[0-9a-fA-F]{6}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Gradient End"
+        },
+        "gradient_angle": {
+          "default": 180,
+          "maximum": 360,
+          "minimum": 0,
+          "title": "Gradient Angle",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "text",
+        "color",
+        "gradient_end",
+        "gradient_angle"
+      ],
+      "title": "TextRun",
+      "type": "object"
+    },
+    "Variant": {
+      "additionalProperties": false,
+      "properties": {
+        "file": {
+          "pattern": "^[a-zA-Z0-9_-][a-zA-Z0-9_.-]{0,150}$",
+          "title": "File",
+          "type": "string"
+        },
+        "generated_at": {
+          "title": "Generated At",
+          "type": "string"
+        },
+        "art_version": {
+          "title": "Art Version",
+          "type": "integer"
+        },
+        "call_id": {
+          "title": "Call Id",
+          "type": "string"
+        },
+        "width": {
+          "title": "Width",
+          "type": "integer"
+        },
+        "height": {
+          "title": "Height",
+          "type": "integer"
+        },
+        "warnings": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Warnings",
+          "type": "array"
+        }
+      },
+      "required": [
+        "file",
+        "generated_at",
+        "art_version",
+        "call_id",
+        "width",
+        "height",
+        "warnings"
+      ],
+      "title": "Variant",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "project": {
+      "$ref": "#/$defs/Project"
+    },
+    "project_summary": {
+      "$ref": "#/$defs/ProjectSummary"
+    },
+    "job": {
+      "$ref": "#/$defs/Job"
+    },
+    "settings": {
+      "$ref": "#/$defs/FoundrySettings"
+    },
+    "call": {
+      "$ref": "#/$defs/ModelCall"
+    },
+    "target_model_edit": {
+      "$ref": "#/$defs/TargetModelEdit"
+    },
+    "create_project": {
+      "$ref": "#/$defs/CreateProject"
+    },
+    "screen_edit": {
+      "$ref": "#/$defs/ScreenEdit"
+    },
+    "screens_edit": {
+      "$ref": "#/$defs/ScreensEdit"
+    },
+    "art_edit": {
+      "$ref": "#/$defs/ArtEdit"
+    },
+    "generation_request": {
+      "$ref": "#/$defs/GenerationRequest"
+    },
+    "export_request": {
+      "$ref": "#/$defs/ExportRequest"
+    },
+    "deployment_request": {
+      "$ref": "#/$defs/DeploymentRequest"
+    },
+    "prompt_edit": {
+      "$ref": "#/$defs/PromptEdit"
+    },
+    "prompt_catalog": {
+      "$ref": "#/$defs/PromptCatalog"
+    }
+  },
+  "required": [
+    "project",
+    "project_summary",
+    "job",
+    "settings",
+    "call",
+    "target_model_edit",
+    "create_project",
+    "screen_edit",
+    "screens_edit",
+    "art_edit",
+    "generation_request",
+    "export_request",
+    "deployment_request",
+    "prompt_edit",
+    "prompt_catalog"
+  ],
+  "title": "ApiTypes",
+  "type": "object"
+}

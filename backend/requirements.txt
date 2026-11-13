@@ -1,0 +1,10 @@
+fastapi>=0.120,<1
+uvicorn>=0.35,<1
+python-multipart>=0.0.20,<1
+pydantic>=2.12,<3
+httpx>=0.28,<1
+Pillow>=11.3,<13
+PyMuPDF>=1.26,<2
+playwright>=1.58,<2
+pytest>=8.4,<10
+ruff>=0.12,<1
